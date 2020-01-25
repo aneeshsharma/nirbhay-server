@@ -53,3 +53,80 @@ def register(user_data):
     print(cursor.rowcount, "records inserted")
 
     return "SUCCESS:"+key
+
+
+def get_key(username, password):
+    db = mysql.connector.connect(
+        host="localhost",
+        user="joe",
+        passwd="joemama",
+        database="hackverse",
+        auth_plugin="mysql_native_password"
+    )
+
+    cursor = db.cursor()
+
+    query = "SELECT password, secret_key FROM users WHERE username='" + username + "';"
+
+    cursor.execute(query)
+
+    res = cursor.fetchall()
+
+    if len(res) > 1:
+        return "SERVER ERROR"
+
+    if len(res) < 1:
+        return "INVALID USERNAME"
+
+    if res[0][0] != password:
+        return "INVALID PASSWORD"
+
+    return res[0][1]
+
+
+def update_location(lat, lng, secret_key):
+    db = mysql.connector.connect(
+        host="localhost",
+        user="joe",
+        passwd="joemama",
+        database="hackverse",
+        auth_plugin="mysql_native_password"
+    )
+
+    cursor = db.cursor()
+
+    query = "UPDATE users SET lat=" + \
+        float(lat) + ", lng=" + float(lng) + \
+        " WHERE secret_key='" + secret_key + "';"
+
+    cursor.execute(query)
+    db.commit()
+
+    if cursor.rowcount < 1:
+        return "UNABLE TO UPDATE"
+
+    return "SUCCESS"
+
+
+def update_dest(lat, lng, secret_key):
+    db = mysql.connector.connect(
+        host="localhost",
+        user="joe",
+        passwd="joemama",
+        database="hackverse",
+        auth_plugin="mysql_native_password"
+    )
+
+    cursor = db.cursor()
+
+    query = "UPDATE users SET destLat=" + \
+        float(lat) + ", destLng=" + float(lng) + \
+        " WHERE secret_key='" + secret_key + "';"
+
+    cursor.execute(query)
+    db.commit()
+
+    if cursor.rowcount < 1:
+        return "UNABLE TO UPDATE"
+
+    return "SUCCESS"
