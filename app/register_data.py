@@ -21,6 +21,16 @@ def register(user_data):
 
     cursor = db.cursor()
 
+    query = "SELECT username FROM users WHERE username='" + \
+        user_data['username'] + "';"
+
+    cursor.execute(query)
+
+    res = cursor.fetchall()
+
+    if len(res) >= 1:
+        return "USERNAME ALREADY EXISTS"
+
     query = "INSERT INTO users (username, name, password, aadhar, mobile, alt_mobile) VALUES ('" +\
         user_data['username'] + "', '" +\
         user_data['name'] + "', '" +\
