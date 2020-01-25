@@ -34,3 +34,8 @@ def register():
         return "Invalid Request"
     except Exception as e:
         return "Exception : " + str(e)
+
+
+@app.route('/location', methods=['POST'])
+def location():
+    return str(request.form)
