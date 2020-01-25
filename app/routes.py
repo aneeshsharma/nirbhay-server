@@ -29,7 +29,7 @@ def register():
             user_data = request.form
             if not rd.verify(user_data):
                 return "FAILED:NO_DATA"
-            return str(user_data)
+            return rd.register(user_data)
 
         return "Invalid Request"
     except Exception as e:
