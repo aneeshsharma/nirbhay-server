@@ -54,7 +54,7 @@ def location():
         return str(e)
 
 
-@app.route('/update_dest', methods=['POST']):
+@app.route('/update_dest', methods=['POST'])
 def destination():
     try:
         if request.method == 'POST':
