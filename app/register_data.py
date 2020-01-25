@@ -1,4 +1,6 @@
 import mysql.connector
+import string
+import random
 
 
 def verify(user_data):
@@ -31,17 +33,23 @@ def register(user_data):
     if len(res) >= 1:
         return "USERNAME ALREADY EXISTS"
 
-    query = "INSERT INTO users (username, name, password, aadhar, mobile, alt_mobile) VALUES ('" +\
+    key = ''.join([random.choice(string.ascii_uppercase + string.digits)
+                   for _ in range(20)])
+
+    query = "INSERT INTO users (username, name, password, aadhar, mobile, alt_mobile, secret_key) VALUES ('" +\
         user_data['username'] + "', '" +\
         user_data['name'] + "', '" +\
         user_data['password'] + "', '" +\
         user_data['aadhar'] + "', '" +\
         user_data['mobile'] + "', '" +\
-        user_data['alt_mobile'] + "');"
+        user_data['alt_mobile'] + "', '" +\
+        key + "');"
+
+    print("Querying: ", query)
 
     cursor.execute(query)
     db.commit()
 
     print(cursor.rowcount, "records inserted")
 
-    return "SUCCESS"
+    return "SUCCESS:"+key
