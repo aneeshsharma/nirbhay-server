@@ -1,4 +1,3 @@
-import gender_check
 from app import gender_check as gc
 from app import app
 from flask import request
