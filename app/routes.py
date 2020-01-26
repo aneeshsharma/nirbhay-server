@@ -102,6 +102,6 @@ def gender():
     with open(fileName, "wb") as f:
         f.write(data)
         f.close()
-    resp = Response(gc.findGender(fileName, model_dir))
+    resp = Response(gc.findGender(fileName, dir_path))
     resp.headers['Access-Control-Allow-Origin'] = '*'
     return resp
