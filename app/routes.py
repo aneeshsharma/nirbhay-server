@@ -1,5 +1,6 @@
 from app import app
 from flask import request
+from flask import Response
 from app import register_data as rd
 
 
@@ -17,7 +18,10 @@ def login():
             username = request.form['username']
             password = request.form['password']
             key = rd.get_key(username, password)
-            return key
+            resp = Response(key)
+            resp.headers['Access-Control-Allow-Origin'] = '*'
+            resp.headers['Content-Type'] = 'text'
+            return resp
         print('Invalid')
         return "Invalid Request"
     except Exception as e:
