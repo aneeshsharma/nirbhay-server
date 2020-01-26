@@ -1,3 +1,5 @@
+import gender_check
+from app import gender_check as gc
 from app import app
 from flask import request
 from flask import Response
@@ -5,7 +7,6 @@ from app import register_data as rd
 import base64
 import string
 import random
-from app import gender_check as gc
 
 
 @app.route('/')
