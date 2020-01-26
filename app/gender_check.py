@@ -40,7 +40,7 @@ def findGender(image_url):
     prediction = model.predict(data)
     if prediction[0] >= 0.7:
         return 'MALE'
-    else if prediction[1] >= 0.7:
+    elif prediction[1] >= 0.7:
         return 'FEMALE'
     else:
         return 'UNDEFINED'
