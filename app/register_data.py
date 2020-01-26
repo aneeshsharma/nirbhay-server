@@ -96,7 +96,7 @@ def update_location(lat, lng, secret_key):
     cursor = db.cursor()
 
     query = "UPDATE users SET lat=" + \
-        float(lat) + ", lng=" + float(lng) + \
+        lat + ", lng=" + lng + \
         " WHERE secret_key='" + secret_key + "';"
 
     cursor.execute(query)
@@ -120,7 +120,7 @@ def update_dest(lat, lng, secret_key):
     cursor = db.cursor()
 
     query = "UPDATE users SET destLat=" + \
-        float(lat) + ", destLng=" + float(lng) + \
+        lat + ", destLng=" + lng + \
         " WHERE secret_key='" + secret_key + "';"
 
     cursor.execute(query)

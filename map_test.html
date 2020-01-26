@@ -1,10 +1,19 @@
 <!DOCTYPE html>
 <html>
-    <div id="map" style="width: 500px; height: 500px;"></div>
-    <div id="latlong">
-        <p>Latitude: <input size="20" type="text" id="latbox" name="lat" /></p>
-        <p>Longitude: <input size="20" type="text" id="lngbox" name="lng" /></p>
-    </div>
+    <form method="POST" action="http://localhost:5000/update_location">
+        <div id="map" style="width: 500px; height: 500px;"></div>
+        <input type="password" value="0T58K0XQ6EOUKXU1Y6FK" name="key" />
+        <div id="latlong">
+            <p>
+                Latitude: <input size="20" type="text" id="latbox" name="lat" />
+            </p>
+            <p>
+                Longitude:
+                <input size="20" type="text" id="lngbox" name="lng" />
+            </p>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
     <script type="text/javascript">
         var map;
         function initialize() {
