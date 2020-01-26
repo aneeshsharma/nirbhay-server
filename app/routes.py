@@ -17,7 +17,7 @@ def login():
             username = request.form['username']
             password = request.form['password']
             key = rd.get_key(username, password)
-            return "Content-Type: application/text\n" + key
+            return "Content-Type: application/json {\"key\" : \"" + key + "\"}"
         print('Invalid')
         return "Invalid Request"
     except Exception as e:
