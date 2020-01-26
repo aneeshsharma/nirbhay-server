@@ -13,7 +13,7 @@ def index():
 def login():
     try:
         if request.method == 'POST':
-            print(request.form['username'] + " | " + request.form['password'])
+            print(request.args['username'] + " | " + request.args['password'])
             username = request.form['username']
             password = request.form['password']
             key = rd.get_key(username, password)
