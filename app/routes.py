@@ -4,6 +4,7 @@ from app import app
 from flask import request
 from flask import Response
 from app import register_data as rd
+from app import gender_check as gc
 import base64
 import string
 import random
