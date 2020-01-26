@@ -1,6 +1,7 @@
 import mysql.connector
 import string
 import random
+import time
 
 
 def verify(user_data):
@@ -122,6 +123,33 @@ def update_dest(lat, lng, secret_key):
     query = "UPDATE users SET destLat=" + \
         lat + ", destLng=" + lng + \
         " WHERE secret_key='" + secret_key + "';"
+
+    cursor.execute(query)
+    db.commit()
+
+    if cursor.rowcount < 1:
+        return "UNABLE TO UPDATE"
+
+    return "SUCCESS"
+
+
+def travel_reg(lat, lng, destLat, destLng, secret_key):
+    db = mysql.connector.connect(
+        host="localhost",
+        user="joe",
+        passwd="joemama",
+        database="hackverse",
+        auth_plugin="mysql_native_password"
+    )
+
+    cursor = db.cursor()
+
+    query = "UPDATE users SET lat=" + lat +\
+            ", lat=" + lng +\
+            ", destLat=" + destLat +\
+            ", destLng=" + destLng +\
+            ", in_transit=" + int(time.time()) + \
+            " WHERE secret_key='" + secret_key + "';"
 
     cursor.execute(query)
     db.commit()
