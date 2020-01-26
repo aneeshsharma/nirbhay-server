@@ -97,7 +97,7 @@ def gender():
         string.ascii_lowercase + string.digits) for _ in range(20)]) + ".jpg"
     fileName = 'image_chache/' + fileName
     data = base64.decodebytes(image_data)
-    print(data)
+    //print(data)
     with open(fileName, "wb") as f:
         f.write(data)
         f.close()
