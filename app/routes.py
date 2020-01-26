@@ -98,6 +98,7 @@ def gender():
     fileName = 'image_chache/' + fileName
     with open(fileName, "wb") as f:
         f.write(base64.decodebytes(image_data))
+        f.close()
     resp = Response(gc.findGender(fileName))
     resp.headers['Access-Control-Allow-Origin'] = '*'
     return resp
