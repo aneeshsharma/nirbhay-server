@@ -2,6 +2,10 @@ from app import app
 from flask import request
 from flask import Response
 from app import register_data as rd
+import base64
+import string
+import random
+import gender_check
 
 
 @app.route('/')
@@ -70,3 +74,29 @@ def destination():
             return rd.update_dest(lat, lng, key)
     except Exception as e:
         return str(e)
+
+
+@app.route('/travel', methods=['POST'])
+def travel():
+    try:
+        lat = request.form['lat']
+        lng = request.form['lng']
+        destLat = request.form['destLat']
+        destLng = request.form['destLng']
+        key = request.form['secret_key']
+        return rd.travel_reg(lat, lng, destLat, destLng, key)
+    except Exception as e:
+        return str(e)
+
+
+@app.route('/gender', methods=['POST'])
+def gender():
+    image_data = request.form['image']
+    fileName = ''.join([random.choice(
+        string.ascii_lowercase + string.digits) for _ in range(20)]) + ".jpg"
+    fileName = 'image_chache/' + fileName
+    with open(fileName, "wb") as f:
+        f.write(base64.decodebytes(image_data))
+    resp = Response(gender_check.findGender(fileName))
+    resp.headers['Access-Control-Allow-Origin'] = '*'
+    return gender_check.findGender(fileName)
