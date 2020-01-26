@@ -92,12 +92,13 @@ def travel():
 
 @app.route('/gender', methods=['POST'])
 def gender():
+    import os
+    dir_path = os.path.dirname(os.path.realpath(__file__))
     image_data = request.form['image']
     fileName = ''.join([random.choice(
         string.ascii_lowercase + string.digits) for _ in range(20)]) + ".jpg"
-    fileName = 'image_chache/' + fileName
+    fileName = dir_path+'/image_chache/' + fileName
     data = base64.decodebytes(image_data.encode('utf-8'))
-    print(data)
     with open(fileName, "wb") as f:
         f.write(data)
         f.close()
