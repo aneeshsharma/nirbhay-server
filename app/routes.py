@@ -9,13 +9,13 @@ def index():
     return 'Hello World'
 
 
-@app.route('/login', methods=["GET"])
+@app.route('/login', methods=["POST"])
 def login():
     try:
-        if request.method == 'GET':
-            print(request.args['username'] + " | " + request.args['password'])
-            username = request.args['username']
-            password = request.args['password']
+        if request.method == 'POST':
+            print(request.form['username'] + " | " + request.form['password'])
+            username = request.form['username']
+            password = request.form['password']
             key = rd.get_key(username, password)
             return key
         print('Invalid')
